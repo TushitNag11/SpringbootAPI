@@ -12,7 +12,7 @@ public interface TransactionService {
 
     Transaction getBalance(String accountNumber);
 
-    List<Transaction> getTransactionsByType(String accountNumber, TransactionType type);
+    Transaction getTransactionsByType(String accountNumber, TransactionType type);
 
     List<Transaction> getTransactionsByDate(String accountNumber,Date startDate, Date endDate);
 }

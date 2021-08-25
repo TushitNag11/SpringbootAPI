@@ -7,6 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.transaction.model.Transaction;
 import com.transaction.service.TransactionService;
+
+import javax.sound.midi.SysexMessage;
 import java.util.Date;
 import java.util.List;
 
@@ -38,15 +40,18 @@ public class TransactionController {
     }
 
     @RequestMapping("/gettransactions")
-    public List<Transaction> getTransactions(@RequestParam(name = "accountNumber") String accountNum, @RequestParam(name = "action") TransactionType type){
+    public int getTransactions(@RequestParam(name = "accountNumber") String accountNum, @RequestParam(name = "action") TransactionType type){
 
+        Transaction transaction = transactionService.getTransactionsByType(accountNum,TransactionType.WITHDRAW);
 
-      return transactionService.getTransactionsByType(accountNum,type);
+      return transaction.getId();
     }
 
     @RequestMapping("/getbydates")
-    public List<Transaction> getByDate(@RequestParam(name = "accNum") String accountNum, @RequestParam(name = "sd")@DateTimeFormat(pattern="yyyy-mm-dd") Date startDate,@RequestParam(name = "ed")@DateTimeFormat(pattern="yyyy-mm-dd") Date endDate){
+    public List<Transaction> getByDate(@RequestParam(name = "accNum") String accountNum,@RequestParam("sd") @DateTimeFormat(pattern = "dd.MM.yyyy") Date startDate,@RequestParam("ed") @DateTimeFormat(pattern = "dd.MM.yyyy") Date endDate){
 
+        System.out.println("STARTDATE -  "+startDate.toString());
+        System.out.println("ENDDATE  - "+endDate);
         return transactionService.getTransactionsByDate(accountNum,startDate,endDate);
 
     }

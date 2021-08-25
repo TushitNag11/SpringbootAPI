@@ -42,9 +42,9 @@ public class TransactionServiceImpl implements TransactionService{
 	}
 
 	@Override
-	public List<Transaction> getTransactionsByType(String accountNumber, TransactionType type) {
+	public Transaction getTransactionsByType(String accountNumber, TransactionType type) {
 
-		List<Transaction> transactionList;
+		Transaction  transactionList;
 
 		transactionList = transactionRepository.findByTransactionType(accountNumber,type);
 

@@ -34,11 +34,11 @@ public class Transaction {
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "transaction_time",nullable = false)
-	private Date transactionTimeDate;
+	private Date transactionTime;
 	
 	@PrePersist
 	private void onCreate() {
-		transactionTimeDate = new Date();
+		transactionTime = new Date();
 	}
 	
 	
